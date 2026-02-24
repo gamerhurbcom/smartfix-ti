@@ -3,13 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartFix TI | Sistema Integrado Firebase</title>
+    <title>SmartFix TI | Técnico de Informática RJ</title>
     
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-storage-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
     
     <!-- Cloudinary Widget -->
     <script src="https://upload-widget.cloudinary.com/global/all.js" type="text/javascript"></script>
@@ -32,6 +31,7 @@
             --neon-green: #0aff0a;
             --neon-orange: #ff9500;
             --neon-pink: #ff006e;
+            --neon-yellow: #ffd700;
             --dark-bg: #050508;
             --darker-bg: #020203;
             --glass: rgba(255, 255, 255, 0.03);
@@ -73,64 +73,58 @@
             opacity: 0.3;
         }
 
-        /* Loading */
-        .loader {
+        /* TOP BAR - NOVO */
+        .top-bar {
+            background: linear-gradient(90deg, #000, #001a33, #000);
+            border-bottom: 1px solid var(--neon-blue);
+            padding: 0.6rem 5%;
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            z-index: 10000;
+            z-index: 1001;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            transition: opacity 0.5s;
-        }
-
-        .loader.hidden {
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .loader-bar {
-            width: 300px;
-            height: 4px;
-            background: #333;
-            border-radius: 2px;
-            overflow: hidden;
-            margin-top: 2rem;
-            position: relative;
-        }
-
-        .loader-progress {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            animation: load 3s ease-out forwards;
-        }
-
-        .loader-status {
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.85rem;
             font-family: 'Orbitron', monospace;
+        }
+
+        .top-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             color: var(--neon-blue);
-            margin-top: 1rem;
-            font-size: 0.9rem;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
         }
 
-        @keyframes load {
-            0% { width: 0%; }
-            50% { width: 70%; }
-            100% { width: 100%; }
+        .top-bar-item i {
+            color: var(--neon-green);
         }
 
-        /* Navigation */
+        .top-bar-whatsapp {
+            color: var(--neon-green);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .top-bar-whatsapp:hover {
+            text-shadow: 0 0 15px var(--neon-green);
+            transform: scale(1.05);
+        }
+
+        /* Navigation - ajustada para top bar */
         nav {
             position: fixed;
-            top: 0;
+            top: 45px; /* abaixo da top bar */
             width: 100%;
-            padding: 1.5rem 5%;
-            background: rgba(5, 5, 8, 0.9);
+            padding: 1rem 5%;
+            background: rgba(5, 5, 8, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--neon-blue);
             z-index: 1000;
@@ -141,7 +135,7 @@
 
         .logo {
             font-family: 'Orbitron', monospace;
-            font-size: 1.8rem;
+            font-size: 1.6rem;
             font-weight: 900;
             color: var(--neon-blue);
             text-decoration: none;
@@ -166,8 +160,7 @@
             transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-size: 0.9rem;
-            position: relative;
+            font-size: 0.85rem;
         }
 
         .nav-links a:hover {
@@ -179,7 +172,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--neon-green);
             font-family: 'Orbitron', monospace;
         }
@@ -207,66 +200,32 @@
             background: rgba(255, 0, 110, 0.2);
             border: 1px solid var(--neon-pink);
             color: var(--neon-pink);
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 5px;
             cursor: pointer;
             font-family: 'Orbitron', monospace;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             transition: all 0.3s;
         }
 
         .admin-btn:hover {
             background: var(--neon-pink);
             color: #fff;
-            box-shadow: 0 0 20px var(--neon-pink);
         }
 
-        /* Sections */
-        section {
-            padding: 6rem 5%;
-            position: relative;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .section-tag {
-            color: var(--neon-purple);
-            font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .section-title {
-            font-family: 'Orbitron', monospace;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .section-line {
-            width: 100px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
-            margin: 0 auto;
-            box-shadow: 0 0 20px var(--neon-blue);
-        }
-
-        /* Hero */
+        /* Hero - ajustado para top bar */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding-top: 80px;
+            padding-top: 120px; /* espaço para top bar + nav */
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 4rem;
+            font-size: 3.5rem;
             margin-bottom: 1rem;
             font-family: 'Orbitron', monospace;
         }
@@ -277,11 +236,27 @@
         }
 
         .typing-text {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--neon-green);
             font-family: 'Orbitron', monospace;
             margin-bottom: 2rem;
             height: 2rem;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 2rem;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0%, 100% { box-shadow: 0 0 5px var(--neon-blue), inset 0 0 5px var(--neon-blue); }
+            50% { box-shadow: 0 0 20px var(--neon-blue), inset 0 0 10px var(--neon-blue); }
         }
 
         .hero-stats {
@@ -329,11 +304,13 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 0.5rem;
             background: transparent;
             color: var(--neon-blue);
             border: 2px solid var(--neon-blue);
             box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+            border-radius: 5px;
         }
 
         .btn:hover {
@@ -350,32 +327,244 @@
 
         .btn-whatsapp:hover {
             background: rgba(10, 255, 10, 0.1);
-        }
-
-        .btn-danger {
-            color: var(--neon-pink);
-            border-color: var(--neon-pink);
+            box-shadow: 0 0 40px rgba(10, 255, 10, 0.6);
         }
 
         .btn-small {
-            padding: 0.5rem 1rem;
-            font-size: 0.8rem;
+            padding: 0.7rem 1.2rem;
+            font-size: 0.85rem;
         }
 
-        .btn-upload {
-            background: rgba(0, 243, 255, 0.1);
-            color: var(--neon-blue);
-            border: 1px dashed var(--neon-blue);
-            padding: 2rem;
+        .btn-full {
             width: 100%;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 5%;
+            position: relative;
+        }
+
+        .section-header {
             text-align: center;
-            cursor: pointer;
+            margin-bottom: 3rem;
+        }
+
+        .section-tag {
+            color: var(--neon-purple);
+            font-family: 'Orbitron', monospace;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-line {
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            margin: 0 auto;
+            box-shadow: 0 0 20px var(--neon-blue);
+        }
+
+        /* ÁREA DE COBERTURA - NOVO */
+        .coverage-section {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.05), rgba(188, 19, 254, 0.05));
+            border-top: 1px solid var(--neon-blue);
+            border-bottom: 1px solid var(--neon-blue);
+        }
+
+        .coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .coverage-zone {
+            background: var(--glass);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
             transition: all 0.3s;
         }
 
-        .btn-upload:hover {
-            background: rgba(0, 243, 255, 0.2);
-            box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
+        .coverage-zone:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+        }
+
+        .coverage-zone i {
+            font-size: 2rem;
+            color: var(--neon-blue);
+            margin-bottom: 0.8rem;
+        }
+
+        .coverage-zone h4 {
+            font-family: 'Orbitron', monospace;
+            color: #fff;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .coverage-zone p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .coverage-highlight {
+            color: var(--neon-green);
+            font-weight: bold;
+        }
+
+        /* FORMAS DE PAGAMENTO - NOVO */
+        .payment-section {
+            background: var(--darker-bg);
+        }
+
+        .payment-grid {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .payment-method {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 2rem;
+            background: var(--glass);
+            border: 1px solid rgba(0, 243, 255, 0.2);
+            border-radius: 20px;
+            min-width: 150px;
+            transition: all 0.3s;
+        }
+
+        .payment-method:hover {
+            transform: scale(1.05);
+            border-color: var(--neon-green);
+            box-shadow: 0 0 30px rgba(10, 255, 10, 0.2);
+        }
+
+        .payment-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(0, 243, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+        }
+
+        .payment-method:nth-child(1) .payment-icon {
+            color: var(--neon-green);
+            border-color: var(--neon-green);
+            background: rgba(10, 255, 10, 0.1);
+        }
+
+        .payment-method:nth-child(2) .payment-icon {
+            color: var(--neon-purple);
+            border-color: var(--neon-purple);
+            background: rgba(188, 19, 254, 0.1);
+        }
+
+        .payment-method:nth-child(3) .payment-icon {
+            color: var(--neon-orange);
+            border-color: var(--neon-orange);
+            background: rgba(255, 149, 0, 0.1);
+        }
+
+        .payment-method h4 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+        }
+
+        .payment-method p {
+            color: #888;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+
+        /* POLÍTICA DE GARANTIA - NOVO */
+        .warranty-section {
+            background: linear-gradient(135deg, rgba(10, 255, 10, 0.05), rgba(0, 243, 255, 0.05));
+            border-top: 1px solid var(--neon-green);
+            border-bottom: 1px solid var(--neon-green);
+        }
+
+        .warranty-box {
+            background: var(--glass);
+            border: 1px solid var(--neon-green);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warranty-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(10, 255, 10, 0.1) 0%, transparent 70%);
+            animation: rotate 10s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .warranty-icon {
+            font-size: 4rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 30px var(--neon-green);
+        }
+
+        .warranty-box h3 {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.5rem;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .warranty-box p {
+            color: #ccc;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+            font-size: 1rem;
+        }
+
+        .warranty-highlight {
+            color: var(--neon-green);
+            font-weight: bold;
         }
 
         /* Products */
@@ -391,11 +580,11 @@
             background: var(--glass);
             border: 1px solid rgba(0, 243, 255, 0.3);
             color: #fff;
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.3rem;
             border-radius: 25px;
             cursor: pointer;
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
             text-transform: uppercase;
         }
@@ -408,7 +597,7 @@
 
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
             max-width: 1400px;
             margin: 0 auto;
@@ -432,7 +621,7 @@
 
         .product-image {
             width: 100%;
-            height: 220px;
+            height: 200px;
             object-fit: cover;
             border-bottom: 1px solid rgba(0, 243, 255, 0.2);
             background: linear-gradient(135deg, #0a0a1a 0%, #1a1a2e 100%);
@@ -482,17 +671,12 @@
             gap: 0.5rem;
         }
 
-        .btn-product {
-            flex: 1;
-            justify-content: center;
-        }
-
-        /* Services */
+        /* Services - COM BOTÃO CHAMAR AGORA */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 2rem;
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
         }
 
@@ -503,6 +687,8 @@
             padding: 2rem;
             transition: all 0.4s;
             position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
         .service-card:hover {
@@ -523,21 +709,30 @@
             color: var(--neon-blue);
         }
 
-        .service-actions {
-            display: flex;
-            gap: 0.5rem;
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: -30px;
+            background: var(--neon-orange);
+            color: #000;
+            padding: 0.3rem 2rem;
+            font-family: 'Orbitron', monospace;
+            font-size: 0.7rem;
+            font-weight: bold;
+            transform: rotate(45deg);
         }
 
         .service-card h3 {
             font-family: 'Orbitron', monospace;
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
         }
 
         .service-description {
             color: #aaa;
             margin-bottom: 1rem;
             line-height: 1.5;
+            flex-grow: 1;
         }
 
         .service-features {
@@ -552,16 +747,109 @@
         }
 
         .service-features li::before {
-            content: '▹';
+            content: '✓';
             color: var(--neon-green);
             margin-right: 0.5rem;
+            font-weight: bold;
         }
 
         .service-price {
             font-family: 'Orbitron', monospace;
-            font-size: 2rem;
+            font-size: 1.8rem;
             color: var(--neon-blue);
             margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .btn-chamar {
+            flex: 1;
+        }
+
+        /* Admin edit/delete buttons */
+        .admin-controls {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .btn-edit, .btn-delete {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+
+        .btn-edit {
+            background: var(--neon-blue);
+            color: #000;
+        }
+
+        .btn-delete {
+            background: var(--neon-pink);
+            color: #fff;
+        }
+
+        /* CTA Section no final */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(0, 243, 255, 0.1), rgba(188, 19, 254, 0.1));
+            text-align: center;
+            padding: 5rem 2rem;
+        }
+
+        .cta-section h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: #888;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .cta-phone {
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-green);
+            font-size: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        /* Footer com botão */
+        .footer-cta {
+            background: var(--glass);
+            border: 1px solid var(--neon-green);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 600px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .footer-cta h4 {
+            font-family: 'Orbitron', monospace;
+            color: var(--neon-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-cta p {
+            color: #888;
+            margin-bottom: 1.5rem;
         }
 
         /* Modal */
@@ -590,7 +878,7 @@
             border: 1px solid var(--neon-blue);
             border-radius: 20px;
             width: 100%;
-            max-width: 700px;
+            max-width: 600px;
             max-height: 90vh;
             overflow-y: auto;
             box-shadow: 0 0 50px rgba(0, 243, 255, 0.3);
@@ -611,7 +899,7 @@
         .modal-title {
             font-family: 'Orbitron', monospace;
             color: var(--neon-blue);
-            font-size: 1.3rem;
+            font-size: 1.2rem;
         }
 
         .modal-close {
@@ -639,7 +927,7 @@
             color: var(--neon-blue);
             margin-bottom: 0.5rem;
             font-family: 'Orbitron', monospace;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .form-input, .form-select, .form-textarea {
@@ -670,12 +958,6 @@
             gap: 1rem;
         }
 
-        .form-row-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 1rem;
-        }
-
         .modal-footer {
             padding: 1.5rem;
             border-top: 1px solid rgba(0, 243, 255, 0.2);
@@ -687,10 +969,10 @@
             background: var(--darker-bg);
         }
 
-        /* Image Preview */
+        /* Image preview */
         .image-preview {
             width: 100%;
-            height: 200px;
+            height: 180px;
             border: 2px dashed rgba(0, 243, 255, 0.3);
             border-radius: 10px;
             display: flex;
@@ -699,6 +981,7 @@
             margin-bottom: 1rem;
             overflow: hidden;
             position: relative;
+            background: rgba(0, 0, 0, 0.3);
         }
 
         .image-preview img {
@@ -712,7 +995,7 @@
             font-size: 3rem;
         }
 
-        .image-preview .change-btn {
+        .upload-btn {
             position: absolute;
             bottom: 10px;
             right: 10px;
@@ -722,12 +1005,14 @@
             border-radius: 5px;
             font-size: 0.8rem;
             cursor: pointer;
+            border: none;
+            font-family: 'Orbitron', monospace;
         }
 
         /* Admin Panel */
         .admin-panel {
             position: fixed;
-            top: 80px;
+            top: 130px;
             right: 20px;
             background: var(--glass);
             border: 1px solid var(--neon-pink);
@@ -737,7 +1022,7 @@
             display: none;
             backdrop-filter: blur(10px);
             box-shadow: 0 0 30px rgba(255, 0, 110, 0.3);
-            min-width: 220px;
+            min-width: 200px;
         }
 
         .admin-panel.active {
@@ -747,7 +1032,7 @@
         .admin-title {
             font-family: 'Orbitron', monospace;
             color: var(--neon-pink);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             margin-bottom: 1rem;
             text-align: center;
         }
@@ -762,7 +1047,7 @@
             background: rgba(255, 0, 110, 0.1);
             border: 1px solid var(--neon-pink);
             color: var(--neon-pink);
-            padding: 0.8rem 1rem;
+            padding: 0.7rem 1rem;
             border-radius: 5px;
             cursor: pointer;
             font-family: 'Rajdhani', sans-serif;
@@ -778,40 +1063,6 @@
             color: #fff;
         }
 
-        /* Tabs */
-        .tabs {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            border-bottom: 1px solid rgba(0, 243, 255, 0.2);
-        }
-
-        .tab-btn {
-            background: none;
-            border: none;
-            color: #888;
-            padding: 1rem 2rem;
-            font-family: 'Orbitron', monospace;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            color: var(--neon-blue);
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
-        }
-
         /* WhatsApp Float */
         .whatsapp-float {
             position: fixed;
@@ -819,28 +1070,26 @@
             right: 30px;
             width: 60px;
             height: 60px;
-            background: transparent;
-            border: 2px solid var(--neon-green);
+            background: var(--neon-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--neon-green);
+            color: #000;
             font-size: 1.8rem;
             text-decoration: none;
             z-index: 998;
-            box-shadow: 0 0 20px rgba(10, 255, 10, 0.4);
-            animation: float 3s ease-in-out infinite;
+            box-shadow: 0 0 30px rgba(10, 255, 10, 0.6);
+            animation: pulse-whatsapp 2s infinite;
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        @keyframes pulse-whatsapp {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 30px rgba(10, 255, 10, 0.6); }
+            50% { transform: scale(1.1); box-shadow: 0 0 50px rgba(10, 255, 10, 0.8); }
         }
 
         .whatsapp-float:hover {
-            background: var(--neon-green);
-            color: #000;
+            transform: scale(1.15);
         }
 
         /* Toast */
@@ -866,7 +1115,48 @@
             opacity: 1;
         }
 
-        /* Empty State */
+        /* Loading */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-bar {
+            width: 250px;
+            height: 4px;
+            background: #333;
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .loader-progress {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
+            animation: load 2s ease-out forwards;
+        }
+
+        @keyframes load {
+            to { width: 100%; }
+        }
+
+        /* Empty state */
         .empty-state {
             text-align: center;
             padding: 4rem 2rem;
@@ -878,34 +1168,6 @@
             color: var(--neon-blue);
             margin-bottom: 1rem;
             opacity: 0.5;
-        }
-
-        /* Loading Overlay */
-        .loading-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 100;
-            border-radius: 20px;
-        }
-
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 3px solid rgba(0, 243, 255, 0.3);
-            border-top-color: var(--neon-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
 
         /* Footer */
@@ -920,8 +1182,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
-            max-width: 900px;
-            margin: 0 auto 2rem;
+            max-width: 1000px;
+            margin: 0 auto 3rem;
             text-align: left;
         }
 
@@ -929,6 +1191,7 @@
             font-family: 'Orbitron', monospace;
             color: var(--neon-blue);
             margin-bottom: 1rem;
+            font-size: 1rem;
         }
 
         .footer-col p, .footer-col a {
@@ -938,39 +1201,88 @@
             font-size: 0.9rem;
         }
 
+        .footer-col a:hover {
+            color: var(--neon-blue);
+        }
+
         .copyright {
             color: #444;
             font-size: 0.85rem;
             border-top: 1px solid #222;
-            padding-top: 1.5rem;
+            padding-top: 2rem;
+            margin-top: 2rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2rem; }
-            .nav-links { display: none; }
-            .products-grid { grid-template-columns: 1fr; }
-            .services-grid { grid-template-columns: 1fr; }
-            .form-row, .form-row-3 { grid-template-columns: 1fr; }
-            .section-title { font-size: 1.8rem; }
+            .top-bar {
+                font-size: 0.75rem;
+                gap: 1rem;
+                padding: 0.5rem;
+            }
+            
+            .hero {
+                padding-top: 140px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-grid {
+                gap: 1rem;
+            }
+            
+            .coverage-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-panel {
+                right: 10px;
+                left: 10px;
+                top: 140px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Loading Screen -->
+    <!-- Loading -->
     <div class="loader" id="loader">
-        <div style="font-size: 2.5rem; color: var(--neon-blue); font-family: 'Orbitron', monospace; margin-bottom: 1rem;">
+        <div style="font-size: 2rem; color: var(--neon-blue); font-family: 'Orbitron', monospace;">
             <i class="fas fa-bolt"></i> SmartFix TI
         </div>
         <div class="loader-bar">
             <div class="loader-progress"></div>
         </div>
-        <div class="loader-status" id="loaderStatus">Inicializando sistema...</div>
     </div>
 
     <div class="scanlines"></div>
     <canvas id="particle-canvas"></canvas>
+
+    <!-- TOP BAR - NOVO -->
+    <div class="top-bar">
+        <div class="top-bar-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <span>Atendimento RJ</span>
+        </div>
+        <div class="top-bar-item">
+            <i class="fas fa-shield-alt"></i>
+            <span>Garantia 7 dias</span>
+        </div>
+        <a href="https://wa.me/5521993934818" class="top-bar-whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+            <span>WhatsApp 24h</span>
+        </a>
+    </div>
 
     <!-- Navigation -->
     <nav>
@@ -979,12 +1291,14 @@
         </a>
         <div class="connection-status" id="connectionStatus">
             <div class="status-dot offline" id="statusDot"></div>
-            <span id="statusText">OFFLINE</span>
+            <span id="statusText" style="font-size: 0.7rem;">OFFLINE</span>
         </div>
         <ul class="nav-links">
             <li><a href="#products">Loja</a></li>
             <li><a href="#services">Serviços</a></li>
-            <li><button class="admin-btn" onclick="toggleAdminLogin()">
+            <li><a href="#coverage">Área</a></li>
+            <li><a href="#payment">Pagamento</a></li>
+            <li><button class="admin-btn" onclick="toggleAdmin()">
                 <i class="fas fa-lock"></i> Admin
             </button></li>
         </ul>
@@ -994,14 +1308,14 @@
     <div class="admin-panel" id="adminPanel">
         <div class="admin-title">PAINEL ADMIN</div>
         <div class="admin-actions">
-            <button class="admin-action-btn" onclick="openProductModal()">
-                <i class="fas fa-plus"></i> Novo Produto
-            </button>
             <button class="admin-action-btn" onclick="openServiceModal()">
                 <i class="fas fa-plus"></i> Novo Serviço
             </button>
+            <button class="admin-action-btn" onclick="openProductModal()">
+                <i class="fas fa-plus"></i> Novo Produto
+            </button>
             <button class="admin-action-btn" onclick="toggleEditMode()">
-                <i class="fas fa-edit"></i> Modo Edição
+                <i class="fas fa-edit"></i> Editar
             </button>
             <button class="admin-action-btn" onclick="syncData()">
                 <i class="fas fa-sync"></i> Sincronizar
@@ -1021,16 +1335,88 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label class="form-label">Email Administrador</label>
-                    <input type="email" class="form-input" id="adminEmail" placeholder="admin@smartfixti.com">
-                </div>
-                <div class="form-group">
                     <label class="form-label">Senha</label>
                     <input type="password" class="form-input" id="adminPassword" placeholder="••••••••">
                 </div>
             </div>
             <div class="modal-footer">
                 <button class="btn" onclick="loginAdmin()">Entrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Service Modal -->
+    <div class="modal-overlay" id="serviceModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="serviceModalTitle">NOVO SERVIÇO</h3>
+                <button class="modal-close" onclick="closeModal('serviceModal')">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="serviceId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Ícone</label>
+                        <select class="form-select" id="serviceIcon">
+                            <option value="fa-tools">Ferramentas</option>
+                            <option value="fa-laptop">Notebook</option>
+                            <option value="fa-desktop">Desktop</option>
+                            <option value="fa-wifi">WiFi</option>
+                            <option value="fa-shield-virus">Segurança</option>
+                            <option value="fa-broom">Limpeza</option>
+                            <option value="fa-memory">Hardware</option>
+                            <option value="fa-hdd">Armazenamento</option>
+                            <option value="fa-headset">Suporte</option>
+                            <option value="fa-download">Download</option>
+                            <option value="fa-compact-disc">CD/DVD</option>
+                            <option value="fa-microchip">Processador</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Badge (Destaque)</label>
+                        <select class="form-select" id="serviceBadge">
+                            <option value="">Nenhum</option>
+                            <option value="POPULAR">POPULAR</option>
+                            <option value="24H">24 HORAS</option>
+                            <option value="NOVO">NOVO</option>
+                            <option value="PROMO">PROMOÇÃO</option>
+                            <option value="URGENTE">URGENTE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nome do Serviço *</label>
+                    <input type="text" class="form-input" id="serviceName" placeholder="Ex: Formatação Completa">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Descrição *</label>
+                    <input type="text" class="form-input" id="serviceDescription" placeholder="Breve descrição do que inclui...">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Preço *</label>
+                        <input type="text" class="form-input" id="servicePrice" placeholder="80,00 ou 40,00/hora">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Ordem (opcional)</label>
+                        <input type="number" class="form-input" id="serviceOrder" placeholder="0" value="0">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Itens Incluídos (um por linha)</label>
+                    <textarea class="form-textarea" id="serviceFeatures" placeholder="• Backup de arquivos&#10;• Instalação Windows&#10;• Drivers atualizados&#10;• Programas essenciais"></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" onclick="closeModal('serviceModal')" style="background: transparent; border-color: #666; color: #666;">Cancelar</button>
+                <button class="btn" onclick="saveService()">
+                    <i class="fas fa-save"></i> Salvar
+                </button>
             </div>
         </div>
     </div>
@@ -1045,34 +1431,33 @@
             <div class="modal-body">
                 <input type="hidden" id="productId">
                 
-                <!-- Image Upload -->
                 <div class="image-preview" id="productImagePreview">
                     <i class="fas fa-image placeholder"></i>
-                    <button class="change-btn" onclick="openCloudinaryWidget('product')">
+                    <button class="upload-btn" onclick="openCloudinaryWidget()">
                         <i class="fas fa-cloud-upload-alt"></i> Upload
                     </button>
                 </div>
                 <input type="hidden" id="productImageUrl">
 
                 <div class="form-group">
-                    <label class="form-label">Nome do Produto *</label>
-                    <input type="text" class="form-input" id="productName" placeholder="Ex: Mouse Gamer RGB">
+                    <label class="form-label">Nome *</label>
+                    <input type="text" class="form-input" id="productName" placeholder="Nome do produto">
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
                         <label class="form-label">Preço (R$) *</label>
-                        <input type="number" class="form-input" id="productPrice" placeholder="99.90" step="0.01">
+                        <input type="number" class="form-input" id="productPrice" step="0.01" placeholder="99.90">
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Preço Antigo (R$)</label>
-                        <input type="number" class="form-input" id="productOldPrice" placeholder="129.90" step="0.01">
+                        <label class="form-label">Preço Antigo</label>
+                        <input type="number" class="form-input" id="productOldPrice" step="0.01" placeholder="129.90">
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label class="form-label">Categoria *</label>
+                        <label class="form-label">Categoria</label>
                         <select class="form-select" id="productCategory">
                             <option value="perifericos">Periféricos</option>
                             <option value="hardware">Hardware</option>
@@ -1084,7 +1469,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Link de Afiliado *</label>
+                        <label class="form-label">Link Afiliado *</label>
                         <input type="url" class="form-input" id="productLink" placeholder="https://...">
                     </div>
                 </div>
@@ -1095,7 +1480,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-danger" onclick="closeModal('productModal')" style="background: transparent;">Cancelar</button>
+                <button class="btn" onclick="closeModal('productModal')" style="background: transparent; border-color: #666; color: #666;">Cancelar</button>
                 <button class="btn" onclick="saveProduct()">
                     <i class="fas fa-save"></i> Salvar
                 </button>
@@ -1103,84 +1488,18 @@
         </div>
     </div>
 
-    <!-- Service Modal -->
-    <div class="modal-overlay" id="serviceModal">
-        <div class="modal">
-            <div class="modal-header">
-                <h3 class="modal-title" id="serviceModalTitle">NOVO SERVIÇO</h3>
-                <button class="modal-close" onclick="closeModal('serviceModal')">&times;</button>
-            </div>
-            <div class="modal-body">
-                <input type="hidden" id="serviceId">
-
-                <div class="form-row-3">
-                    <div class="form-group">
-                        <label class="form-label">Ícone *</label>
-                        <select class="form-select" id="serviceIcon">
-                            <option value="fa-tools">Ferramentas</option>
-                            <option value="fa-laptop">Notebook</option>
-                            <option value="fa-desktop">Desktop</option>
-                            <option value="fa-wifi">WiFi</option>
-                            <option value="fa-shield-virus">Segurança</option>
-                            <option value="fa-broom">Limpeza</option>
-                            <option value="fa-memory">Hardware</option>
-                            <option value="fa-hdd">Armazenamento</option>
-                            <option value="fa-headset">Suporte</option>
-                            <option value="fa-download">Instalação</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Destaque</label>
-                        <select class="form-select" id="serviceBadge">
-                            <option value="">Nenhum</option>
-                            <option value="POPULAR">Popular</option>
-                            <option value="24H">24 Horas</option>
-                            <option value="NOVO">Novo</option>
-                            <option value="PROMO">Promoção</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Preço (R$) *</label>
-                        <input type="text" class="form-input" id="servicePrice" placeholder="80,00">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Nome do Serviço *</label>
-                    <input type="text" class="form-input" id="serviceName" placeholder="Ex: Formatação Completa">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Descrição Curta *</label>
-                    <input type="text" class="form-input" id="serviceDescription" placeholder="Breve descrição do serviço...">
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">Itens Incluídos (um por linha)</label>
-                    <textarea class="form-textarea" id="serviceFeatures" placeholder="• Backup de arquivos&#10;• Instalação Windows&#10;• Drivers atualizados"></textarea>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-danger" onclick="closeModal('serviceModal')" style="background: transparent;">Cancelar</button>
-                <button class="btn" onclick="saveService()">
-                    <i class="fas fa-save"></i> Salvar
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section class="hero">
         <div class="hero-content">
-            <div style="display: inline-block; padding: 0.5rem 1.5rem; border: 1px solid var(--neon-blue); color: var(--neon-blue); font-family: 'Orbitron', monospace; font-size: 0.8rem; margin-bottom: 2rem; animation: pulse 2s infinite;">
-                <i class="fas fa-database"></i> FIREBASE CONNECTED
+            <div class="hero-badge">
+                <i class="fas fa-check-circle"></i> TÉCNICO CERTIFICADO
             </div>
             <h1><span class="brand-highlight">SmartFix</span> TI</h1>
             <div class="typing-text" id="typing-text"></div>
             
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number" id="clientCount">0</span>
+                    <span class="stat-number" id="clientCount">30</span>
                     <span class="stat-label">Clientes Satisfeitos</span>
                 </div>
                 <div class="stat">
@@ -1193,18 +1512,136 @@
                 </div>
             </div>
 
-            <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-                <a href="https://wa.me/5521993934818" class="btn btn-whatsapp" target="_blank">
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://wa.me/5521993934818?text=Olá!%20Vi%20o%20site%20da%20SmartFix%20TI%20e%20gostaria%20de%20um%20orçamento." 
+                   class="btn btn-whatsapp btn-full" target="_blank" style="max-width: 300px;">
                     <i class="fab fa-whatsapp"></i> Chamar Agora
-                </a>
-                <a href="#products" class="btn">
-                    <i class="fas fa-shopping-cart"></i> Ver Loja
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
+    <!-- ÁREA DE COBERTURA - NOVO -->
+    <section id="coverage" class="coverage-section">
+        <div class="section-header">
+            <span class="section-tag">// ÁREA_DE_ATUAÇÃO</span>
+            <h2 class="section-title">ATENDIMENTO EM TODA A CIDADE</h2>
+            <div class="section-line"></div>
+            <p style="color: #888; margin-top: 1rem;">Confira os bairros onde atendo</p>
+        </div>
+
+        <div class="coverage-grid">
+            <div class="coverage-zone">
+                <i class="fas fa-map-pin"></i>
+                <h4>ZONA SUL</h4>
+                <p>Copacabana<br>Ipanema<br>Leblon<br>Botafogo<br>Flamengo<br><span class="coverage-highlight">+ toda Zona Sul</span></p>
+            </div>
+            <div class="coverage-zone">
+                <i class="fas fa-map-pin"></i>
+                <h4>ZONA NORTE</h4>
+                <p>Tijuca<br>Vila Isabel<br>Grajaú<br>Maracanã<br>Andaraí<br><span class="coverage-highlight">+ toda Zona Norte</span></p>
+            </div>
+            <div class="coverage-zone">
+                <i class="fas fa-map-pin"></i>
+                <h4>CENTRO</h4>
+                <p>Centro<br>Lapa<br>Cinelândia<br>Santa Teresa<br>Gamboa<br><span class="coverage-highlight">+ região central</span></p>
+            </div>
+            <div class="coverage-zone">
+                <i class="fas fa-map-pin"></i>
+                <h4>ZONA OESTE</h4>
+                <p>Barra da Tijuca<br>Recreio<br>Jacarepaguá<br>Taquara<br>Vargem Grande<br><span class="coverage-highlight">+ toda Zona Oeste</span></p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <p style="color: var(--neon-blue); font-family: 'Orbitron', monospace;">
+                <i class="fas fa-info-circle"></i> Não encontrou seu bairro? Chame no WhatsApp que verifico disponibilidade!
+            </p>
+        </div>
+    </section>
+
+    <!-- FORMAS DE PAGAMENTO - NOVO -->
+    <section id="payment" class="payment-section">
+        <div class="section-header">
+            <span class="section-tag">// PAGAMENTO_FÁCIL</span>
+            <h2 class="section-title">FORMAS DE PAGAMENTO</h2>
+            <div class="section-line"></div>
+            <p style="color: #888; margin-top: 1rem;">Pague como preferir, sem complicação</p>
+        </div>
+
+        <div class="payment-grid">
+            <div class="payment-method">
+                <div class="payment-icon">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <h4>PIX</h4>
+                <p>À vista<br>Sem taxas<br>Na hora</p>
+            </div>
+            <div class="payment-method">
+                <div class="payment-icon">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <h4>CARTÃO</h4>
+                <p>Débito ou Crédito<br>Parcelado<br>Maquininha</p>
+            </div>
+            <div class="payment-method">
+                <div class="payment-icon">
+                    <i class="fas fa-money-bill-wave"></i>
+                </div>
+                <h4>DINHEIRO</h4>
+                <p>À vista<br>Troco disponível<br>Desconto especial</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: var(--glass); border-radius: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+            <p style="color: var(--neon-green); font-family: 'Orbitron', monospace; font-size: 1.1rem;">
+                <i class="fas fa-tag"></i> 10% DE DESCONTO NO PIX OU DINHEIRO!
+            </p>
+        </div>
+    </section>
+
+    <!-- POLÍTICA DE GARANTIA - NOVO -->
+    <section class="warranty-section">
+        <div class="section-header">
+            <span class="section-tag">// GARANTIA_REAL</span>
+            <h2 class="section-title">POLÍTICA DE GARANTIA</h2>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="warranty-box">
+            <div class="warranty-icon">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <h3>7 DIAS DE GARANTIA EM TODOS OS SERVIÇOS</h3>
+            <p>
+                <span class="warranty-highlight">Formatação:</span> Se o sistema apresentar problemas em 7 dias, refaço sem custo.<br><br>
+                <span class="warranty-highlight">Limpeza:</span> Se o computador esquentar ou fazer barulho, volto ajustar.<br><br>
+                <span class="warranty-highlight">Vírus:</span> Se voltar infecção no prazo, limpo novamente grátis.<br><br>
+                <span class="warranty-highlight">Rede:</span> Se cair conexão ou mudar senha, retorno configurar.<br><br>
+                <i class="fas fa-exclamation-triangle" style="color: var(--neon-orange);"></i> 
+                Garantia não cobre: danos físicos pelo cliente, quedas de energia, ou problemas em hardware com defeito.
+            </p>
+        </div>
+    </section>
+
+    <!-- Serviços - COM BOTÃO CHAMAR AGORA -->
+    <section id="services">
+        <div class="section-header">
+            <span class="section-tag">// SERVIÇOS_TÉCNICOS</span>
+            <h2 class="section-title">NOSSOS SERVIÇOS</h2>
+            <div class="section-line"></div>
+            <p style="color: #888; margin-top: 1rem;">Clique em "Chamar Agora" para solicitar qualquer serviço</p>
+        </div>
+
+        <div class="services-grid" id="servicesGrid">
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <h3>Carregando serviços...</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos -->
     <section id="products">
         <div class="section-header">
             <span class="section-tag">// LOJA_AFILIADOS</span>
@@ -1222,109 +1659,77 @@
         </div>
 
         <div class="products-grid" id="productsGrid">
-            <div class="loading-overlay">
-                <div class="spinner"></div>
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <h3>Carregando produtos...</h3>
             </div>
-        </div>
-
-        <div class="empty-state" id="emptyProducts" style="display: none;">
-            <i class="fas fa-box-open"></i>
-            <h3>Nenhum produto cadastrado</h3>
-            <p>Adicione produtos no painel administrativo</p>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services">
-        <div class="section-header">
-            <span class="section-tag">// SERVIÇOS_TÉCNICOS</span>
-            <h2 class="section-title">NOSSOS SERVIÇOS</h2>
-            <div class="section-line"></div>
-        </div>
-
-        <div class="services-grid" id="servicesGrid">
-            <div class="loading-overlay">
-                <div class="spinner"></div>
-            </div>
-        </div>
-
-        <div class="empty-state" id="emptyServices" style="display: none;">
-            <i class="fas fa-tools"></i>
-            <h3>Nenhum serviço cadastrado</h3>
-            <p>Adicione serviços no painel administrativo</p>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="section-header">
-            <span class="section-tag">// POR_QUE_SMARTFIX</span>
-            <h2 class="section-title">DIFERENCIAIS</h2>
-            <div class="section-line"></div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto;">
-            <div style="background: var(--glass); border: 1px solid rgba(0, 243, 255, 0.1); border-radius: 15px; padding: 2rem; text-align: center;">
-                <div style="width: 70px; height: 70px; margin: 0 auto 1rem; background: var(--glass); border: 2px solid var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--neon-blue);">
-                    <i class="fas fa-home"></i>
-                </div>
-                <h3 style="font-family: 'Orbitron', monospace; color: var(--neon-blue);">ATENDIMENTO DOMICILIAR</h3>
-                <p style="color: #888;">Vou até você no Rio de Janeiro</p>
-            </div>
-            <div style="background: var(--glass); border: 1px solid rgba(0, 243, 255, 0.1); border-radius: 15px; padding: 2rem; text-align: center;">
-                <div style="width: 70px; height: 70px; margin: 0 auto 1rem; background: var(--glass); border: 2px solid var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--neon-blue);">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
-                <h3 style="font-family: 'Orbitron', monospace; color: var(--neon-blue);">GARANTIA REAL</h3>
-                <p style="color: #888;">7 dias de garantia em tudo</p>
-            </div>
-            <div style="background: var(--glass); border: 1px solid rgba(0, 243, 255, 0.1); border-radius: 15px; padding: 2rem; text-align: center;">
-                <div style="width: 70px; height: 70px; margin: 0 auto 1rem; background: var(--glass); border: 2px solid var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--neon-blue);">
-                    <i class="fas fa-dollar-sign"></i>
-                </div>
-                <h3 style="font-family: 'Orbitron', monospace; color: var(--neon-blue);">PREÇO JUSTO</h3>
-                <p style="color: #888;">Orçamento sem surpresas</p>
-            </div>
-            <div style="background: var(--glass); border: 1px solid rgba(0, 243, 255, 0.1); border-radius: 15px; padding: 2rem; text-align: center;">
-                <div style="width: 70px; height: 70px; margin: 0 auto 1rem; background: var(--glass); border: 2px solid var(--neon-blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: var(--neon-blue);">
-                    <i class="fas fa-clock"></i>
-                </div>
-                <h3 style="font-family: 'Orbitron', monospace; color: var(--neon-blue);">RÁPIDO</h3>
-                <p style="color: #888;">Atendimento no mesmo dia</p>
-            </div>
+    <!-- CTA Final -->
+    <section class="cta-section">
+        <h2 style="font-family: 'Orbitron', monospace; color: var(--neon-blue); margin-bottom: 1rem;">
+            PRONTO PARA RESOLVER SEU PROBLEMA?
+        </h2>
+        <p style="color: #888; margin-bottom: 2rem;">
+            Atendimento rápido, garantia real e preço justo.<br>
+            Chame agora e receba atenção em minutos!
+        </p>
+        <a href="https://wa.me/5521993934818?text=Olá!%20Preciso%20de%20ajuda%20com%20meu%20computador%20urgente!" 
+           class="btn btn-whatsapp" style="font-size: 1.2rem; padding: 1.2rem 3rem;" target="_blank">
+            <i class="fab fa-whatsapp"></i> CHAMAR AGORA
+        </a>
+        <div class="cta-phone">
+            <i class="fas fa-phone"></i> (21) 99393-4818
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
+        <div class="footer-cta">
+            <h4><i class="fas fa-headset"></i> ATENDIMENTO IMEDIATO</h4>
+            <p>Não perca tempo! Clique no botão abaixo e fale diretamente comigo pelo WhatsApp. Orçamento em minutos!</p>
+            <a href="https://wa.me/5521993934818" class="btn btn-whatsapp btn-full" target="_blank">
+                <i class="fab fa-whatsapp"></i> FALAR NO WHATSAPP
+            </a>
+        </div>
+
         <div class="footer-grid">
             <div class="footer-col">
                 <h4><i class="fas fa-bolt"></i> SmartFix TI</h4>
-                <p style="color: #888; font-size: 0.9rem;">Técnico de informática no Rio de Janeiro. Serviços de qualidade com garantia.</p>
+                <p>Técnico de informática no Rio de Janeiro. Serviços com garantia de 7 dias e atendimento domiciliar.</p>
+                <p style="margin-top: 1rem; color: var(--neon-green);">
+                    <i class="fas fa-check-circle"></i> Disponível agora
+                </p>
             </div>
             <div class="footer-col">
-                <h4>LINKS</h4>
-                <a href="#products">Loja</a><br>
-                <a href="#services">Serviços</a><br>
-                <a href="#about">Sobre</a>
+                <h4>LINKS RÁPIDOS</h4>
+                <a href="#services"><i class="fas fa-tools"></i> Serviços</a><br>
+                <a href="#products"><i class="fas fa-shopping-cart"></i> Loja</a><br>
+                <a href="#coverage"><i class="fas fa-map"></i> Área de Cobertura</a><br>
+                <a href="#payment"><i class="fas fa-money-bill"></i> Formas de Pagamento</a>
             </div>
             <div class="footer-col">
                 <h4>CONTATO</h4>
-                <p style="color: #888;"><i class="fab fa-whatsapp"></i> (21) 99393-4818</p>
-                <p style="color: #888;"><i class="fas fa-envelope"></i> contato@smartfixti.com</p>
-                <p style="color: #888;"><i class="fas fa-map-marker-alt"></i> Rio de Janeiro - RJ</p>
+                <p><i class="fab fa-whatsapp" style="color: var(--neon-green);"></i> (21) 99393-4818</p>
+                <p><i class="fas fa-envelope"></i> contato@smartfixti.com</p>
+                <p><i class="fas fa-map-marker-alt"></i> Rio de Janeiro - RJ</p>
+                <p style="margin-top: 1rem; color: #666; font-size: 0.8rem;">
+                    <i class="fas fa-clock"></i> Seg a Dom: 8h às 20h
+                </p>
             </div>
         </div>
+
         <div class="copyright">
             <p>&copy; 2024 SmartFix TI - Todos os direitos reservados</p>
             <p style="margin-top: 0.5rem; font-size: 0.75rem; color: #333;">
-                Powered by <i class="fas fa-fire"></i> Firebase + <i class="fas fa-cloud"></i> Cloudinary
+                Técnico de Informática Independente | CNPJ: XX.XXX.XXX/0001-XX
             </p>
         </div>
     </footer>
 
     <!-- WhatsApp Float -->
-    <a href="https://wa.me/5521993934818" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/5521993934818" class="whatsapp-float" target="_blank" title="Chamar no WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -1333,35 +1738,32 @@
 
     <script>
         // ==========================================
-        // CONFIGURAÇÃO FIREBASE - SUBSTITUA COM SEUS DADOS
+        // CONFIGURAÇÃO - SUBSTITUA COM SEUS DADOS
         // ==========================================
         const firebaseConfig = {
-            apiKey: "SUA_API_KEY_AQUI",
-            authDomain: "smartfix-ti.firebaseapp.com",
-            projectId: "smartfix-ti",
-            storageBucket: "smartfix-ti.appspot.com",
+            apiKey: "SUA_API_KEY",
+            authDomain: "SEU_PROJETO.firebaseapp.com",
+            projectId: "SEU_PROJETO",
+            storageBucket: "SEU_PROJETO.appspot.com",
             messagingSenderId: "123456789",
-            appId: "1:123456789:web:abcdef123456"
+            appId: "1:123456789:web:abc123"
         };
 
-        // ==========================================
-        // CONFIGURAÇÃO CLOUDINARY - SUBSTITUA COM SEUS DADOS
-        // ==========================================
         const cloudinaryConfig = {
             cloudName: 'SEU_CLOUD_NAME',
-            uploadPreset: 'SEU_UPLOAD_PRESET',
-            apiKey: 'SUA_API_KEY_CLOUDINARY'
+            uploadPreset: 'SEU_UPLOAD_PRESET'
         };
 
-        // Inicialização
-        let db, auth, cloudinaryWidget;
+        // ==========================================
+        // SISTEMA
+        // ==========================================
+        let db, cloudinaryWidget;
         let isAdmin = false;
         let editMode = false;
         let currentFilter = 'all';
-        let products = [];
         let services = [];
+        let products = [];
 
-        // App State
         const App = {
             init() {
                 this.initFirebase();
@@ -1369,25 +1771,25 @@
                 this.setupParticles();
                 this.setupTyping();
                 this.loadData();
+                
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                }, 1500);
             },
 
             initFirebase() {
                 try {
                     firebase.initializeApp(firebaseConfig);
                     db = firebase.firestore();
-                    auth = firebase.auth();
                     
-                    // Monitorar conexão
-                    db.collection('products').onSnapshot(() => {
-                        this.updateConnectionStatus(true);
+                    db.collection('services').onSnapshot(() => {
+                        this.updateStatus(true);
                     }, () => {
-                        this.updateConnectionStatus(false);
+                        this.updateStatus(false);
                     });
-
-                } catch (e) {
-                    console.error('Firebase init error:', e);
-                    this.showToast('Erro ao conectar com Firebase');
-                    this.updateConnectionStatus(false);
+                } catch(e) {
+                    console.log('Firebase offline, usando LocalStorage');
+                    this.updateStatus(false);
                 }
             },
 
@@ -1395,11 +1797,9 @@
                 cloudinaryWidget = cloudinary.createUploadWidget({
                     cloudName: cloudinaryConfig.cloudName,
                     uploadPreset: cloudinaryConfig.uploadPreset,
-                    apiKey: cloudinaryConfig.apiKey,
                     sources: ['local', 'url', 'camera'],
                     multiple: false,
-                    maxFileSize: 5000000, // 5MB
-                    acceptedFileTypes: ['image/*'],
+                    maxFileSize: 5000000,
                     styles: {
                         palette: {
                             window: '#050508',
@@ -1419,115 +1819,277 @@
                     }
                 }, (error, result) => {
                     if (!error && result && result.event === "success") {
-                        const imageUrl = result.info.secure_url;
-                        document.getElementById('productImageUrl').value = imageUrl;
+                        const url = result.info.secure_url;
+                        document.getElementById('productImageUrl').value = url;
                         document.getElementById('productImagePreview').innerHTML = `
-                            <img src="${imageUrl}" alt="Preview">
-                            <button class="change-btn" onclick="openCloudinaryWidget('product')">
+                            <img src="${url}" alt="Preview">
+                            <button class="upload-btn" onclick="openCloudinaryWidget()">
                                 <i class="fas fa-sync"></i> Trocar
                             </button>
                         `;
-                        this.showToast('Imagem enviada com sucesso!');
+                        this.showToast('Imagem enviada!');
                     }
                 });
             },
 
-            updateConnectionStatus(connected) {
+            updateStatus(online) {
                 const dot = document.getElementById('statusDot');
                 const text = document.getElementById('statusText');
-                
-                if (connected) {
+                if (online) {
                     dot.classList.remove('offline');
                     text.textContent = 'ONLINE';
                     text.style.color = 'var(--neon-green)';
                 } else {
                     dot.classList.add('offline');
-                    text.textContent = 'OFFLINE';
-                    text.style.color = '#ff0000';
+                    text.textContent = 'LOCAL';
+                    text.style.color = '#ff9500';
                 }
             },
 
             async loadData() {
-                document.getElementById('loaderStatus').textContent = 'Conectando ao Firebase...';
-                
+                // Carregar serviços
                 try {
-                    // Carregar produtos
-                    const productsSnapshot = await db.collection('products').orderBy('createdAt', 'desc').get();
-                    products = productsSnapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-                    
-                    // Carregar serviços
-                    const servicesSnapshot = await db.collection('services').orderBy('order', 'asc').get();
-                    services = servicesSnapshot.docs.map(doc => ({
-                        id: doc.id,
-                        ...doc.data()
-                    }));
-
-                    this.renderProducts();
-                    this.renderServices();
-                    
-                    // Atualizar contador de clientes
-                    const statsDoc = await db.collection('stats').doc('general').get();
-                    if (statsDoc.exists) {
-                        document.getElementById('clientCount').textContent = statsDoc.data().clients || 30;
-                    }
-
-                    setTimeout(() => {
-                        document.getElementById('loader').classList.add('hidden');
-                    }, 500);
-
-                } catch (error) {
-                    console.error('Error loading data:', error);
-                    this.showToast('Erro ao carregar dados. Usando cache local.');
-                    
-                    // Fallback para localStorage
-                    const localProducts = localStorage.getItem('smartfix_products');
-                    const localServices = localStorage.getItem('smartfix_services');
-                    
-                    if (localProducts) products = JSON.parse(localProducts);
-                    if (localServices) services = JSON.parse(localServices);
-                    
-                    this.renderProducts();
-                    this.renderServices();
-                    document.getElementById('loader').classList.add('hidden');
+                    const snap = await db.collection('services').orderBy('order', 'asc').get();
+                    services = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                } catch(e) {
+                    const local = localStorage.getItem('smartfix_services');
+                    if (local) services = JSON.parse(local);
                 }
+
+                // Carregar produtos
+                try {
+                    const snap = await db.collection('products').orderBy('createdAt', 'desc').get();
+                    products = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                } catch(e) {
+                    const local = localStorage.getItem('smartfix_products');
+                    if (local) products = JSON.parse(local);
+                }
+
+                // Se vazio, criar exemplos
+                if (services.length === 0) this.createDefaultServices();
+                if (products.length === 0) this.createDefaultProducts();
+
+                this.renderServices();
+                this.renderProducts();
             },
 
-            renderProducts() {
-                const grid = document.getElementById('productsGrid');
-                const empty = document.getElementById('emptyProducts');
-                
-                let filtered = products;
-                if (currentFilter !== 'all') {
-                    filtered = products.filter(p => p.category === currentFilter);
-                }
+            createDefaultServices() {
+                services = [
+                    {
+                        id: '1',
+                        name: 'FORMATAÇÃO COMPLETA',
+                        description: 'Instalação limpa do Windows com backup, drivers e programas essenciais',
+                        price: '80,00',
+                        icon: 'fa-compact-disc',
+                        badge: '',
+                        features: ['Backup de arquivos importantes', 'Windows 10/11 atualizado', 'Drivers oficiais instalados', 'Programas essenciais (Chrome, Office)', 'Antivírus gratuito'],
+                        order: 0
+                    },
+                    {
+                        id: '2',
+                        name: 'LIMPEZA E MANUTENÇÃO',
+                        description: 'Limpeza física interna completa para evitar superaquecimento',
+                        price: '60,00',
+                        icon: 'fa-broom',
+                        badge: 'POPULAR',
+                        features: ['Limpeza de coolers e dissipadores', 'Troca de pasta térmica', 'Lubrificação de ventoinhas', 'Organização interna de cabos', 'Teste de temperatura'],
+                        order: 1
+                    },
+                    {
+                        id: '3',
+                        name: 'REMOÇÃO DE VÍRUS',
+                        description: 'Limpeza completa de malwares, vírus e propagandas sem formatar',
+                        price: '50,00',
+                        icon: 'fa-shield-virus',
+                        badge: '',
+                        features: ['Varredura completa do sistema', 'Remoção de malwares e spywares', 'Limpeza de navegadores', 'Instalação de antivírus', 'Otimização de inicialização'],
+                        order: 2
+                    },
+                    {
+                        id: '4',
+                        name: 'CONFIGURAÇÃO WIFI',
+                        description: 'Instalação e configuração de roteadores, repetidores e otimização de sinal',
+                        price: '70,00',
+                        icon: 'fa-wifi',
+                        badge: '',
+                        features: ['Configuração de roteador', 'Instalação de repetidor', 'Melhor posicionamento', 'Segurança da rede (senha)', 'Teste de velocidade incluído'],
+                        order: 3
+                    },
+                    {
+                        id: '5',
+                        name: 'INSTALAÇÃO DE PROGRAMAS',
+                        description: 'Instalação de Office, antivírus, editores e softwares diversos',
+                        price: '40,00',
+                        icon: 'fa-download',
+                        badge: '',
+                        features: ['Microsoft Office (todas versões)', 'Antivírus pagos ou gratuitos', 'Editores de foto e vídeo', 'Programas específicos do cliente', 'Ativação e configuração completa'],
+                        order: 4
+                    },
+                    {
+                        id: '6',
+                        name: 'BACKUP E RECUPERAÇÃO',
+                        description: 'Cópia segura de fotos, documentos e arquivos importantes',
+                        price: '60,00',
+                        icon: 'fa-hdd',
+                        badge: '',
+                        features: ['Backup de fotos e vídeos', 'Cópia de documentos', 'Exportação de emails', 'Organização de arquivos', 'Recuperação de dados deletados'],
+                        order: 5
+                    },
+                    {
+                        id: '7',
+                        name: 'UPGRADE DE HARDWARE',
+                        description: 'Instalação de SSD, memória RAM, placa de vídeo e mais',
+                        price: '50,00',
+                        icon: 'fa-memory',
+                        badge: '',
+                        features: ['Instalação de SSD (muito mais rápido)', 'Upgrade de memória RAM', 'Troca de placa de vídeo', 'Instalação de fonte nova', 'Teste de compatibilidade'],
+                        order: 6
+                    },
+                    {
+                        id: '8',
+                        name: 'SUPORTE REMOTO',
+                        description: 'Atendimento rápido via internet sem sair de casa',
+                        price: '40,00/hora',
+                        icon: 'fa-headset',
+                        badge: '24H',
+                        features: ['Acesso remoto seguro', 'Resolução de erros', 'Configuração de programas', 'Otimização rápida', 'Sem taxa de deslocamento'],
+                        order: 7
+                    }
+                ];
+                this.saveServices();
+            },
 
-                if (filtered.length === 0) {
-                    grid.innerHTML = '';
-                    empty.style.display = 'block';
-                    return;
-                }
+            createDefaultProducts() {
+                products = [
+                    {
+                        id: '1',
+                        name: 'Mouse Gamer RGB 7200 DPI',
+                        price: 89.90,
+                        oldPrice: 129.90,
+                        category: 'perifericos',
+                        image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400',
+                        description: 'Mouse óptico com 7 botões, iluminação RGB ajustável e sensor de alta precisão.',
+                        link: 'https://amazon.com.br'
+                    },
+                    {
+                        id: '2',
+                        name: 'SSD Kingston 240GB A400',
+                        price: 119.90,
+                        oldPrice: 159.90,
+                        category: 'armazenamento',
+                        image: 'https://images.unsplash.com/photo-1597872200969-2b65d56bd16b?w=400',
+                        description: 'SSD SATA III, velocidades de até 500MB/s. Transforme seu PC lento em rápido!',
+                        link: 'https://amazon.com.br'
+                    },
+                    {
+                        id: '3',
+                        name: 'Teclado Mecânico Switch Blue',
+                        price: 149.90,
+                        oldPrice: 199.90,
+                        category: 'perifericos',
+                        image: 'https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?w=400',
+                        description: 'Teclado mecânico com switches blue, anti-ghosting e iluminação LED.',
+                        link: 'https://amazon.com.br'
+                    }
+                ];
+                this.saveProducts();
+            },
 
-                empty.style.display = 'none';
+            saveServices() {
+                localStorage.setItem('smartfix_services', JSON.stringify(services));
+                try {
+                    services.forEach(s => {
+                        if (!s.id.includes('local_')) {
+                            db.collection('services').doc(s.id).set(s);
+                        }
+                    });
+                } catch(e) {}
+            },
+
+            saveProducts() {
+                localStorage.setItem('smartfix_products', JSON.stringify(products));
+                try {
+                    products.forEach(p => {
+                        if (!p.id.includes('local_')) {
+                            db.collection('products').doc(p.id).set({...p, createdAt: new Date()});
+                        }
+                    });
+                } catch(e) {}
+            },
+
+            renderServices() {
+                const grid = document.getElementById('servicesGrid');
                 
-                grid.innerHTML = filtered.map(product => `
-                    <div class="product-card" data-id="${product.id}">
-                        ${editMode && isAdmin ? `
-                            <div style="position: absolute; top: 10px; left: 10px; z-index: 10; display: flex; gap: 5px;">
-                                <button onclick="App.editProduct('${product.id}')" class="btn btn-small" style="min-width: 40px; padding: 0.5rem;">
+                grid.innerHTML = services.map(service => `
+                    <div class="service-card" data-id="${service.id}">
+                        ${isAdmin && editMode ? `
+                            <div class="admin-controls">
+                                <button class="btn-edit" onclick="App.editService('${service.id}')" title="Editar">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button onclick="App.deleteProduct('${product.id}')" class="btn btn-danger btn-small" style="min-width: 40px; padding: 0.5rem;">
+                                <button class="btn-delete" onclick="App.deleteService('${service.id}')" title="Excluir">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         ` : ''}
-                        <img src="${product.image || 'https://via.placeholder.com/400x220/0a0a1a/00f3ff?text=SmartFix+TI'}" 
-                             alt="${product.name}" 
-                             class="product-image"
-                             onerror="this.src='https://via.placeholder.com/400x220/0a0a1a/00f3ff?text=SmartFix+TI'">
+                        
+                        <div class="service-header">
+                            <div class="service-icon">
+                                <i class="fas ${service.icon || 'fa-tools'}"></i>
+                            </div>
+                            ${service.badge ? `<div class="service-badge">${service.badge}</div>` : ''}
+                        </div>
+                        
+                        <h3>${service.name}</h3>
+                        <p class="service-description">${service.description}</p>
+                        
+                        <ul class="service-features">
+                            ${(service.features || []).map(f => `<li>${f}</li>`).join('')}
+                        </ul>
+                        
+                        <div class="service-price">R$ ${service.price}</div>
+                        
+                        <div class="service-actions">
+                            <a href="https://wa.me/5521993934818?text=Olá!%20Gostaria%20de%20solicitar%20${encodeURIComponent(service.name)}" 
+                               class="btn btn-whatsapp btn-chamar" target="_blank">
+                                <i class="fab fa-whatsapp"></i> Chamar Agora
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            renderProducts() {
+                const grid = document.getElementById('productsGrid');
+                let filtered = currentFilter === 'all' ? products : products.filter(p => p.category === currentFilter);
+                
+                if (filtered.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-state" style="grid-column: 1/-1;">
+                            <i class="fas fa-box-open"></i>
+                            <h3>Nenhum produto nesta categoria</h3>
+                        </div>
+                    `;
+                    return;
+                }
+
+                grid.innerHTML = filtered.map(product => `
+                    <div class="product-card" data-id="${product.id}">
+                        ${isAdmin && editMode ? `
+                            <div class="admin-controls">
+                                <button class="btn-edit" onclick="App.editProduct('${product.id}')" title="Editar">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-delete" onclick="App.deleteProduct('${product.id}')" title="Excluir">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        ` : ''}
+                        
+                        <img src="${product.image || 'https://via.placeholder.com/400x200/0a0a1a/00f3ff?text=SmartFix+TI'}" 
+                             alt="${product.name}" class="product-image"
+                             onerror="this.src='https://via.placeholder.com/400x200/0a0a1a/00f3ff?text=SmartFix+TI'">
+                        
                         <div class="product-content">
                             <div class="product-category">${product.category}</div>
                             <h3 class="product-title">${product.name}</h3>
@@ -1536,7 +2098,7 @@
                                 R$ ${product.price.toFixed(2)}
                                 ${product.oldPrice ? `<span class="old-price">R$ ${product.oldPrice.toFixed(2)}</span>` : ''}
                             </div>
-                            <a href="${product.link}" target="_blank" class="btn btn-product btn-small">
+                            <a href="${product.link}" target="_blank" class="btn btn-small" style="width: 100%; justify-content: center;">
                                 <i class="fas fa-external-link-alt"></i> Ver Oferta
                             </a>
                         </div>
@@ -1544,53 +2106,43 @@
                 `).join('');
             },
 
-            renderServices() {
-                const grid = document.getElementById('servicesGrid');
-                const empty = document.getElementById('emptyServices');
+            // CRUD Operations
+            async saveService() {
+                const id = document.getElementById('serviceId').value;
+                const featuresText = document.getElementById('serviceFeatures').value;
+                
+                const service = {
+                    name: document.getElementById('serviceName').value,
+                    description: document.getElementById('serviceDescription').value,
+                    price: document.getElementById('servicePrice').value,
+                    icon: document.getElementById('serviceIcon').value,
+                    badge: document.getElementById('serviceBadge').value,
+                    features: featuresText.split('\n').filter(f => f.trim()),
+                    order: parseInt(document.getElementById('serviceOrder').value) || 0
+                };
 
-                if (services.length === 0) {
-                    grid.innerHTML = '';
-                    empty.style.display = 'block';
+                if (!service.name || !service.price) {
+                    alert('Preencha nome e preço!');
                     return;
                 }
 
-                empty.style.display = 'none';
+                if (id) {
+                    const idx = services.findIndex(s => s.id === id);
+                    if (idx !== -1) services[idx] = { ...services[idx], ...service };
+                } else {
+                    service.id = 'local_' + Date.now();
+                    services.push(service);
+                }
 
-                grid.innerHTML = services.map(service => `
-                    <div class="service-card" data-id="${service.id}">
-                        ${editMode && isAdmin ? `
-                            <div style="position: absolute; top: 10px; right: 10px; z-index: 10; display: flex; gap: 5px;">
-                                <button onclick="App.editService('${service.id}')" class="btn btn-small" style="min-width: 40px; padding: 0.5rem;">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button onclick="App.deleteService('${service.id}')" class="btn btn-danger btn-small" style="min-width: 40px; padding: 0.5rem;">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        ` : ''}
-                        <div class="service-header">
-                            <div class="service-icon">
-                                <i class="fas ${service.icon || 'fa-tools'}"></i>
-                            </div>
-                            ${service.badge ? `<div class="promo-badge">${service.badge}</div>` : ''}
-                        </div>
-                        <h3>${service.name}</h3>
-                        <p class="service-description">${service.description}</p>
-                        <ul class="service-features">
-                            ${(service.features || []).map(f => `<li>${f}</li>`).join('')}
-                        </ul>
-                        <div class="service-price">R$ ${service.price}</div>
-                        <a href="https://wa.me/5521993934818?text=Olá!%20Gostaria%20de%20solicitar%20${encodeURIComponent(service.name)}" 
-                           class="btn btn-whatsapp btn-small" target="_blank">
-                            <i class="fab fa-whatsapp"></i> Solicitar
-                        </a>
-                    </div>
-                `).join('');
+                this.saveServices();
+                this.renderServices();
+                this.closeModal('serviceModal');
+                this.showToast('Serviço salvo!');
             },
 
-            // Admin Functions
             async saveProduct() {
                 const id = document.getElementById('productId').value;
+                
                 const product = {
                     name: document.getElementById('productName').value,
                     price: parseFloat(document.getElementById('productPrice').value),
@@ -1598,8 +2150,7 @@
                     category: document.getElementById('productCategory').value,
                     link: document.getElementById('productLink').value,
                     image: document.getElementById('productImageUrl').value,
-                    description: document.getElementById('productDescription').value,
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    description: document.getElementById('productDescription').value
                 };
 
                 if (!product.name || !product.price || !product.link) {
@@ -1607,143 +2158,70 @@
                     return;
                 }
 
-                try {
-                    if (id) {
-                        await db.collection('products').doc(id).update(product);
-                    } else {
-                        product.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-                        await db.collection('products').add(product);
-                    }
-                    
-                    this.showToast('Produto salvo com sucesso!');
-                    this.closeModal('productModal');
-                    this.loadData();
-                    
-                } catch (error) {
-                    console.error('Error saving product:', error);
-                    
-                    // Fallback LocalStorage
-                    if (id) {
-                        const idx = products.findIndex(p => p.id === id);
-                        if (idx !== -1) products[idx] = { ...products[idx], ...product };
-                    } else {
-                        product.id = Date.now().toString();
-                        products.push(product);
-                    }
-                    localStorage.setItem('smartfix_products', JSON.stringify(products));
-                    this.renderProducts();
-                    this.closeModal('productModal');
-                    this.showToast('Produto salvo localmente (Firebase offline)');
+                if (id) {
+                    const idx = products.findIndex(p => p.id === id);
+                    if (idx !== -1) products[idx] = { ...products[idx], ...product };
+                } else {
+                    product.id = 'local_' + Date.now();
+                    products.push(product);
                 }
+
+                this.saveProducts();
+                this.renderProducts();
+                this.closeModal('productModal');
+                this.showToast('Produto salvo!');
             },
 
-            async saveService() {
-                const id = document.getElementById('serviceId').value;
-                const featuresText = document.getElementById('serviceFeatures').value;
-                const features = featuresText.split('\n').filter(f => f.trim());
-
-                const service = {
-                    name: document.getElementById('serviceName').value,
-                    description: document.getElementById('serviceDescription').value,
-                    price: document.getElementById('servicePrice').value,
-                    icon: document.getElementById('serviceIcon').value,
-                    badge: document.getElementById('serviceBadge').value,
-                    features: features,
-                    updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-                };
-
-                if (!service.name || !service.price) {
-                    alert('Preencha os campos obrigatórios!');
-                    return;
-                }
-
-                try {
-                    if (id) {
-                        await db.collection('services').doc(id).update(service);
-                    } else {
-                        service.createdAt = firebase.firestore.FieldValue.serverTimestamp();
-                        service.order = services.length;
-                        await db.collection('services').add(service);
-                    }
-                    
-                    this.showToast('Serviço salvo com sucesso!');
-                    this.closeModal('serviceModal');
-                    this.loadData();
-                    
-                } catch (error) {
-                    console.error('Error saving service:', error);
-                    
-                    // Fallback LocalStorage
-                    if (id) {
-                        const idx = services.findIndex(s => s.id === id);
-                        if (idx !== -1) services[idx] = { ...services[idx], ...service };
-                    } else {
-                        service.id = Date.now().toString();
-                        services.push(service);
-                    }
-                    localStorage.setItem('smartfix_services', JSON.stringify(services));
-                    this.renderServices();
-                    this.closeModal('serviceModal');
-                    this.showToast('Serviço salvo localmente (Firebase offline)');
-                }
+            deleteService(id) {
+                if (!confirm('Excluir este serviço?')) return;
+                services = services.filter(s => s.id !== id);
+                this.saveServices();
+                this.renderServices();
+                this.showToast('Serviço excluído!');
             },
 
-            async deleteProduct(id) {
-                if (!confirm('Tem certeza que deseja excluir este produto?')) return;
+            deleteProduct(id) {
+                if (!confirm('Excluir este produto?')) return;
+                products = products.filter(p => p.id !== id);
+                this.saveProducts();
+                this.renderProducts();
+                this.showToast('Produto excluído!');
+            },
+
+            editService(id) {
+                const s = services.find(x => x.id === id);
+                if (!s) return;
+
+                document.getElementById('serviceId').value = s.id;
+                document.getElementById('serviceName').value = s.name;
+                document.getElementById('serviceDescription').value = s.description;
+                document.getElementById('servicePrice').value = s.price;
+                document.getElementById('serviceIcon').value = s.icon || 'fa-tools';
+                document.getElementById('serviceBadge').value = s.badge || '';
+                document.getElementById('serviceOrder').value = s.order || 0;
+                document.getElementById('serviceFeatures').value = (s.features || []).join('\n');
                 
-                try {
-                    await db.collection('products').doc(id).delete();
-                    this.showToast('Produto excluído!');
-                    this.loadData();
-                } catch (error) {
-                    products = products.filter(p => p.id !== id);
-                    localStorage.setItem('smartfix_products', JSON.stringify(products));
-                    this.renderProducts();
-                    this.showToast('Produto excluído localmente');
-                }
-            },
-
-            async deleteService(id) {
-                if (!confirm('Tem certeza que deseja excluir este serviço?')) return;
-                
-                try {
-                    await db.collection('services').doc(id).delete();
-                    this.showToast('Serviço excluído!');
-                    this.loadData();
-                } catch (error) {
-                    services = services.filter(s => s.id !== id);
-                    localStorage.setItem('smartfix_services', JSON.stringify(services));
-                    this.renderServices();
-                    this.showToast('Serviço excluído localmente');
-                }
+                document.getElementById('serviceModalTitle').textContent = 'EDITAR SERVIÇO';
+                this.openModal('serviceModal');
             },
 
             editProduct(id) {
-                const product = products.find(p => p.id === id);
-                if (!product) return;
+                const p = products.find(x => x.id === id);
+                if (!p) return;
 
-                document.getElementById('productId').value = product.id;
-                document.getElementById('productName').value = product.name;
-                document.getElementById('productPrice').value = product.price;
-                document.getElementById('productOldPrice').value = product.oldPrice || '';
-                document.getElementById('productCategory').value = product.category;
-                document.getElementById('productLink').value = product.link;
-                document.getElementById('productImageUrl').value = product.image || '';
-                document.getElementById('productDescription').value = product.description || '';
+                document.getElementById('productId').value = p.id;
+                document.getElementById('productName').value = p.name;
+                document.getElementById('productPrice').value = p.price;
+                document.getElementById('productOldPrice').value = p.oldPrice || '';
+                document.getElementById('productCategory').value = p.category;
+                document.getElementById('productLink').value = p.link;
+                document.getElementById('productImageUrl').value = p.image || '';
+                document.getElementById('productDescription').value = p.description || '';
 
-                if (product.image) {
+                if (p.image) {
                     document.getElementById('productImagePreview').innerHTML = `
-                        <img src="${product.image}" alt="Preview">
-                        <button class="change-btn" onclick="openCloudinaryWidget('product')">
-                            <i class="fas fa-sync"></i> Trocar
-                        </button>
-                    `;
-                } else {
-                    document.getElementById('productImagePreview').innerHTML = `
-                        <i class="fas fa-image placeholder"></i>
-                        <button class="change-btn" onclick="openCloudinaryWidget('product')">
-                            <i class="fas fa-cloud-upload-alt"></i> Upload
-                        </button>
+                        <img src="${p.image}" alt="Preview">
+                        <button class="upload-btn" onclick="openCloudinaryWidget()">Trocar</button>
                     `;
                 }
 
@@ -1751,36 +2229,15 @@
                 this.openModal('productModal');
             },
 
-            editService(id) {
-                const service = services.find(s => s.id === id);
-                if (!service) return;
-
-                document.getElementById('serviceId').value = service.id;
-                document.getElementById('serviceName').value = service.name;
-                document.getElementById('serviceDescription').value = service.description;
-                document.getElementById('servicePrice').value = service.price;
-                document.getElementById('serviceIcon').value = service.icon || 'fa-tools';
-                document.getElementById('serviceBadge').value = service.badge || '';
-                document.getElementById('serviceFeatures').value = (service.features || []).join('\n');
-
-                document.getElementById('serviceModalTitle').textContent = 'EDITAR SERVIÇO';
-                this.openModal('serviceModal');
-            },
-
-            // UI Functions
-            openModal(modalId) {
-                document.getElementById(modalId).classList.add('active');
-            },
-
-            closeModal(modalId) {
-                document.getElementById(modalId).classList.remove('active');
-            },
-
+            // UI Helpers
+            openModal(id) { document.getElementById(id).classList.add('active'); },
+            closeModal(id) { document.getElementById(id).classList.remove('active'); },
+            
             showToast(msg) {
-                const toast = document.getElementById('toast');
-                toast.textContent = msg;
-                toast.classList.add('show');
-                setTimeout(() => toast.classList.remove('show'), 3000);
+                const t = document.getElementById('toast');
+                t.textContent = msg;
+                t.classList.add('show');
+                setTimeout(() => t.classList.remove('show'), 3000);
             },
 
             setupParticles() {
@@ -1790,7 +2247,7 @@
                 canvas.height = window.innerHeight;
 
                 const particles = [];
-                for (let i = 0; i < 60; i++) {
+                for (let i = 0; i < 50; i++) {
                     particles.push({
                         x: Math.random() * canvas.width,
                         y: Math.random() * canvas.height,
@@ -1802,7 +2259,6 @@
 
                 const animate = () => {
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    
                     particles.forEach(p => {
                         p.x += p.vx;
                         p.y += p.vy;
@@ -1814,22 +2270,6 @@
                         ctx.fillStyle = '#00f3ff';
                         ctx.fill();
                     });
-
-                    for (let i = 0; i < particles.length; i++) {
-                        for (let j = i + 1; j < particles.length; j++) {
-                            const dx = particles[i].x - particles[j].x;
-                            const dy = particles[i].y - particles[j].y;
-                            const dist = Math.sqrt(dx * dx + dy * dy);
-                            if (dist < 100) {
-                                ctx.beginPath();
-                                ctx.strokeStyle = `rgba(0, 243, 255, ${1 - dist / 100})`;
-                                ctx.lineWidth = 0.5;
-                                ctx.moveTo(particles[i].x, particles[i].y);
-                                ctx.lineTo(particles[j].x, particles[j].y);
-                                ctx.stroke();
-                            }
-                        }
-                    }
                     requestAnimationFrame(animate);
                 };
                 animate();
@@ -1841,7 +2281,7 @@
             },
 
             setupTyping() {
-                const text = "SOLUÇÕES EM TECNOLOGIA";
+                const text = "ATENDIMENTO DOMICILIAR • GARANTIA 7 DIAS";
                 const el = document.getElementById('typing-text');
                 let i = 0;
                 
@@ -1849,59 +2289,67 @@
                     if (i < text.length) {
                         el.textContent += text.charAt(i);
                         i++;
-                        setTimeout(type, 100);
+                        setTimeout(type, 80);
                     } else {
                         setTimeout(() => {
                             el.textContent = '';
                             i = 0;
                             type();
-                        }, 3000);
+                        }, 4000);
                     }
                 };
                 setTimeout(type, 1000);
             }
         };
 
-        // Global Functions
-        function toggleAdminLogin() {
+        // Global functions
+        function toggleAdmin() {
             if (isAdmin) {
-                logoutAdmin();
+                isAdmin = false;
+                editMode = false;
+                document.getElementById('adminPanel').classList.remove('active');
+                App.renderServices();
+                App.showToast('Desconectado');
             } else {
                 document.getElementById('loginModal').classList.add('active');
             }
         }
 
         function loginAdmin() {
-            const email = document.getElementById('adminEmail').value;
-            const password = document.getElementById('adminPassword').value;
-
-            // Simples autenticação local (substitua por Firebase Auth se necessário)
-            if (email === 'admin@smartfixti.com' && password === 'smartfix2024') {
+            const pass = document.getElementById('adminPassword').value;
+            if (pass === 'smartfix2024') {
                 isAdmin = true;
                 document.getElementById('loginModal').classList.remove('active');
                 document.getElementById('adminPanel').classList.add('active');
-                App.showToast('Bem-vindo, Administrador!');
-                document.getElementById('adminEmail').value = '';
                 document.getElementById('adminPassword').value = '';
+                App.showToast('Bem-vindo, Admin!');
             } else {
-                alert('Credenciais inválidas!');
+                alert('Senha incorreta!');
             }
         }
 
         function logoutAdmin() {
-            isAdmin = false;
-            editMode = false;
-            document.getElementById('adminPanel').classList.remove('active');
-            App.renderProducts();
-            App.renderServices();
-            App.showToast('Desconectado');
+            toggleAdmin();
         }
 
         function toggleEditMode() {
             editMode = !editMode;
-            App.renderProducts();
             App.renderServices();
-            App.showToast(editMode ? 'Modo Edição Ativado' : 'Modo Edição Desativado');
+            App.renderProducts();
+            App.showToast(editMode ? 'Modo Edição: ON' : 'Modo Edição: OFF');
+        }
+
+        function openServiceModal() {
+            document.getElementById('serviceId').value = '';
+            document.getElementById('serviceName').value = '';
+            document.getElementById('serviceDescription').value = '';
+            document.getElementById('servicePrice').value = '';
+            document.getElementById('serviceIcon').value = 'fa-tools';
+            document.getElementById('serviceBadge').value = '';
+            document.getElementById('serviceOrder').value = '0';
+            document.getElementById('serviceFeatures').value = '';
+            document.getElementById('serviceModalTitle').textContent = 'NOVO SERVIÇO';
+            App.openModal('serviceModal');
         }
 
         function openProductModal() {
@@ -1915,40 +2363,23 @@
             document.getElementById('productDescription').value = '';
             document.getElementById('productImagePreview').innerHTML = `
                 <i class="fas fa-image placeholder"></i>
-                <button class="change-btn" onclick="openCloudinaryWidget('product')">
-                    <i class="fas fa-cloud-upload-alt"></i> Upload
-                </button>
+                <button class="upload-btn" onclick="openCloudinaryWidget()">Upload</button>
             `;
             document.getElementById('productModalTitle').textContent = 'NOVO PRODUTO';
             App.openModal('productModal');
         }
 
-        function openServiceModal() {
-            document.getElementById('serviceId').value = '';
-            document.getElementById('serviceName').value = '';
-            document.getElementById('serviceDescription').value = '';
-            document.getElementById('servicePrice').value = '';
-            document.getElementById('serviceIcon').value = 'fa-tools';
-            document.getElementById('serviceBadge').value = '';
-            document.getElementById('serviceFeatures').value = '';
-            document.getElementById('serviceModalTitle').textContent = 'NOVO SERVIÇO';
-            App.openModal('serviceModal');
+        function openCloudinaryWidget() {
+            if (cloudinaryWidget) cloudinaryWidget.open();
+            else App.showToast('Cloudinary não configurado');
         }
 
-        function openCloudinaryWidget(type) {
-            if (cloudinaryWidget) {
-                cloudinaryWidget.open();
-            } else {
-                App.showToast('Cloudinary não configurado');
-            }
-        }
-
-        function filterProducts(category) {
-            currentFilter = category;
+        function filterProducts(cat) {
+            currentFilter = cat;
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if ((category === 'all' && btn.textContent === 'Todos') ||
-                    btn.textContent.toLowerCase().includes(category)) {
+                if ((cat === 'all' && btn.textContent === 'Todos') || 
+                    btn.textContent.toLowerCase().includes(cat)) {
                     btn.classList.add('active');
                 }
             });
@@ -1957,10 +2388,10 @@
 
         function syncData() {
             App.loadData();
-            App.showToast('Dados sincronizados!');
+            App.showToast('Sincronizado!');
         }
 
-        // Inicializar
+        // Init
         document.addEventListener('DOMContentLoaded', () => {
             App.init();
         });
